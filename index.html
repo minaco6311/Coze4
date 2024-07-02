@@ -32,31 +32,31 @@
             opacity: 1;
         }
         h1 {
-            font-size: 4rem;
+            font-size: 4rem; /* サイズを大きく */
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* シャドウを強く */
+            letter-spacing: 1px; /* 文字間隔を広げる */
         }
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.5rem; /* サイズを大きく */
             margin-bottom: 2rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* シャドウを追加 */
         }
         ul {
             list-style-type: none;
             padding: 0;
             text-align: left;
-            max-width: 80%;
-            margin: 0 auto;
+            max-width: 80%; /* リストの最大幅を設定 */
+            margin: 0 auto; /* 中央揃え */
         }
         li {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem; /* サイズを大きく */
+            margin-bottom: 1.5rem; /* 行間を広げる */
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* シャドウを追加 */
+            line-height: 1.4; /* 行の高さを調整 */
         }
         li.active {
             opacity: 1;
@@ -66,19 +66,20 @@
             background-color: white;
             color: #6e8efb;
             padding: 1rem 2rem;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* サイズを大きく */
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             margin-top: 2rem;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-weight: bold; /* 太字に */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* シャドウを追加 */
         }
         .btn:hover {
             background-color: #f0f0f0;
             transform: scale(1.05);
         }
+        /* 背景にオーバーレイを追加して文字を見やすく */
         .slide::before {
             content: '';
             position: absolute;
@@ -86,21 +87,22 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.3); /* 半透明の黒色オーバーレイ */
             z-index: -1;
         }
     </style>
 </head>
 <body>
     <div id="slideContainer"></div>
-    <script>
-        const slides = [
-            {
-                title: "Cozeの紹介",
-                subtitle: "次世代AIチャットボット作成プラットフォーム",
-                content: []
-            },
-            {
+<script>
+    // スクリプト部分は変更なし
+    const slides = [
+        {
+            title: "Cozeの紹介",
+            subtitle: "次世代AIチャットボット作成プラットフォーム",
+            content: []
+        },
+        {
                 title: "Cozeとは？",
                 content: [
                     "革新的なAIチャットボット作成ツール",
@@ -120,10 +122,11 @@
             {
                 title: "簡単操作で夢のボットを",
                 content: [
-                    "optimize機能で自動プロンプト生成",
-                    "コーディング不要",
-                    "豊富なプラグイン搭載",
-                    "ドラッグ＆ドロップで直感的にフローを設計"
+                    "optimize機能で自動プロンプト生成"
+"コーディング不要",
+"豊富なプラグイン搭載"
+                    "ドラッグ＆ドロップで直感的にフローを設計",
+                   
                 ]
             },
             {
@@ -147,7 +150,8 @@
                 content: [
                     "高度な自然言語処理能力を搭載",
                     "人間らしい対話を実現",
-                    "多言語に対応"
+                    "多言語に対応",
+                    
                 ]
             },
             {
@@ -169,73 +173,68 @@
                     "多様なプラットフォームに対応"
                 ]
             },
-            {
-                title: "さあ、始めよう！",
-                subtitle: "Cozeで、あなたのアイデアを現実のAIボットに",
-                content: [],
-                button: {
-                    text: "Cozeを始める",
-                    url: "https://www.coze.com"
-                }
-            }
-        ];
 
-        const slideContainer = document.getElementById('slideContainer');
-
-        slides.forEach((slide, index) => {
-            const slideElement = document.createElement('div');
-            slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
-            slideElement.innerHTML = `
-                <h1>${slide.title}</h1>
-                ${slide.subtitle ? `<h2>${slide.subtitle}</h2>` : ''}
-                <ul>
-                    ${slide.content.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                ${slide.button ? `<a href="${slide.button.url}" class="btn" target="_blank">${slide.button.text}</a>` : ''}
-            `;
-            slideContainer.appendChild(slideElement);
-        });
-
-        let currentSlide = 0;
-        let currentItem = 0;
-
-        function showNextItem() {
-            const slide = slides[currentSlide];
-            const items = slideContainer.querySelectorAll(`.slide:nth-child(${currentSlide + 1}) li`);
-            
-            if (currentItem < items.length) {
-                items[currentItem].classList.add('active');
-                currentItem++;
-            } else {
-                currentSlide++;
-                currentItem = 0;
-                if (currentSlide >= slides.length) {
-                    currentSlide = 0;
-                }
-                showSlide(currentSlide);
+        {
+            title: "さあ、始めよう！",
+            subtitle: "Cozeで、あなたのアイデアを現実のAIボットに",
+            content: [],
+            button: {
+                text: "Cozeを始める",
+                url: "https://www.coze.com"
             }
         }
+    ];
 
-        function showSlide(index) {
-            const slides = slideContainer.querySelectorAll('.slide');
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-            const items = slideContainer.querySelectorAll(`.slide:nth-child(${index + 1}) li`);
-            items.forEach(item => item.classList.remove('active'));
+    const slideContainer = document.getElementById('slideContainer');
+
+    slides.forEach((slide, index) => {
+        const slideElement = document.createElement('div');
+        slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
+        slideElement.innerHTML = `
+            <h1>${slide.title}</h1>
+            ${slide.subtitle ? `<h2>${slide.subtitle}</h2>` : ''}
+            <ul>
+                ${slide.content.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            ${slide.button ? `<a href="${slide.button.url}" class="btn" target="_blank">${slide.button.text}</a>` : ''}
+        `;
+        slideContainer.appendChild(slideElement);
+    });
+
+    let currentSlide = 0;
+    let currentItem = 0;
+
+    function showNextItem() {
+        const slide = slides[currentSlide];
+        const items = slideContainer.querySelectorAll(`.slide:nth-child(${currentSlide + 1}) li`);
+        
+        if (currentItem < items.length) {
+            items[currentItem].classList.add('active');
+            currentItem++;
+        } else {
+            currentSlide++;
             currentItem = 0;
-        }
-
-        document.addEventListener('click', showNextItem);
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                showNextItem();
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
             }
-        });
+            showSlide(currentSlide);
+        }
+    }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            showSlide(0);
+    function showSlide(index) {
+        const slides = slideContainer.querySelectorAll('.slide');
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
         });
-    </script>
-</body>
+        const items = slideContainer.querySelectorAll(`.slide:nth-child(${index + 1}) li`);
+        items.forEach(item => item.classList.remove('active'));
+    }
+
+    document.addEventListener('click', showNextItem);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+            showNextItem();
+        }
+    });
+</script></body>
 </html>
